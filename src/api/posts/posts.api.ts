@@ -1,7 +1,7 @@
-import { createApiQuery } from "../utils"
+import { apiQueryOptions } from "../utils"
 import { Posts } from "./posts.types"
 
-export const createFetchPostsQuery = () => createApiQuery<Posts>({
+export const createFetchPostsQuery = () => apiQueryOptions<Posts>({
     query: () => `/posts`,
     providesTags: ['posts']
 })

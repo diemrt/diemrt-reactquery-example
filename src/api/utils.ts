@@ -1,4 +1,4 @@
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient, queryOptions } from "@tanstack/react-query";
 import axios from "axios";
 
 const getRootUrl = () => {
@@ -78,17 +78,18 @@ return axios<T>({
     })
 }
 
-export const createApiQuery = <T>(
+export const apiQueryOptions = <T>(
 {
     providesTags, 
     query
 } : {providesTags: string[], query: () => string}) => {
-    return {
+    return queryOptions({
         queryKey: providesTags,
         queryFn: () => fetchData<T>(
             `${getAPIUrl()}${query()}`
-        )
-    }
+        ),
+        retry: 1
+    })
 }
 
 const queryClient = new QueryClient()
