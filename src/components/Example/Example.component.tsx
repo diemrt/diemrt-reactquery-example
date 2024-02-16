@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query"
-import { fetchPosts } from "../../api/posts/posts.api"
+import { fetchPostsQuery } from "../../api/posts/posts.api"
 
 const Example = () => {
-    const { data, isPending, error } = useQuery({
-        queryKey: ['posts'],
-        queryFn: () => fetchPosts
-    })
+    const { data, isPending, isError } = useQuery(fetchPostsQuery)
     
-    if(isPending) return '...'
-    if(error) return 'Qualcosa è andato storto.'
+    if(isPending) 
+        return '...'
+    if(isError) 
+        return 'Qualcosa è andato storto.'
+
     return (
         <div>
             {data?.map((value) => (
