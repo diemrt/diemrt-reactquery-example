@@ -13,7 +13,7 @@ const Example = () => {
         <div>
             {data?.map((value) => (
                 <>
-                    <h1 key={value.id}>{value.title}</h1>
+                    <h1 id={value.id.toString()}>{value.title}</h1>
                 </>
             ))}
         </div>

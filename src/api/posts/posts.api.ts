@@ -1,5 +1,6 @@
 import { apiBasePath } from "../utils"
 import { Posts } from "./posts.types"
+import axios from 'axios';
 
-export const fetchPosts = fetch(`${apiBasePath}/posts`)
-    .then((res) => res.json()) as Promise<Posts>
+export const fetchPosts = axios.get<Posts>(`${apiBasePath}/posts`)
+.then(res => res.data)
