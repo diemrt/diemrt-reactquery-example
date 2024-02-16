@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query"
-import { fetchPostsQuery } from "../../api/posts/posts.api"
+import { createFetchPostsQuery } from "../../api/posts/posts.api"
 
 const Example = () => {
-    const { data, isPending, isError } = useQuery(fetchPostsQuery)
+    const fetchPosts = createFetchPostsQuery()
+    const { data, isPending, isError } = useQuery(fetchPosts)
     
     if(isPending) 
         return '...'
