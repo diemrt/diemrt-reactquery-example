@@ -1,13 +1,13 @@
 import { QueryClientProvider } from "@tanstack/react-query"
 import queryClient from "./api/utils"
-import Example from "./components/Example/Example.component"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+import PostsPage from "./pages/PostsPage/Posts.page"
 
 function App() {
   
   return (
     <QueryClientProvider client={queryClient}>
-      <Example />
+      <PostsPage />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
