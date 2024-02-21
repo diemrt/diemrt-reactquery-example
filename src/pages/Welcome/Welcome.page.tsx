@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { createFetchPostsQuery } from "../../api/posts/posts.api";
+import { fetchPostsQuery } from "../../api/posts/posts.api";
 import PostsWidget from "../../components/PostsWidget/PostsWidget.component";
 import Sidebar from "../../components/Sidebar/Sidebar.component";
 import SidebarContent from "../../components/SidebarContent/SidebarContent.component";
@@ -9,8 +9,8 @@ import { PostsContext } from "./utils";
 
 const Welcome = () => {
   
-  const fetchPosts = createFetchPostsQuery()
-  const { data, isPending } = useQuery(fetchPosts)
+  const fetchPostsQueryOptions = fetchPostsQuery()
+  const { data, isPending } = useQuery(fetchPostsQueryOptions)
   const PostsWidgetWithSkeleton = WithSkeleton(PostsWidget)
 
   return (
