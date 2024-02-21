@@ -1,6 +1,7 @@
-import Sidebar from "../../components/Sidebar/Sidebar.component"
-import SidebarContent from "../../components/SidebarContent/SidebarContent.component"
-import SidebarToggle from "../../components/SidebarToggle/SidebarToggle.component"
+import PostsWidget from "../../components/PostsWidget/PostsWidget.component";
+import Sidebar from "../../components/Sidebar/Sidebar.component";
+import SidebarContent from "../../components/SidebarContent/SidebarContent.component";
+import SidebarToggle from "../../components/SidebarToggle/SidebarToggle.component";
 
 const Welcome = () => {
   return (
@@ -8,10 +9,10 @@ const Welcome = () => {
       <SidebarToggle />
       <Sidebar />
       <SidebarContent>
-        Welcome page
+        <PostsWidget />
       </SidebarContent>
     </>
-  )
-}
+  );
+};
 
-export default Welcome
+export default Welcome;
