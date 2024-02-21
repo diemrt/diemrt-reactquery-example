@@ -11,8 +11,8 @@ declare global {
 interface Props {
     children: React.ReactNode;
 }
-  
-const DefaultWrapper = ({
+
+const ReinitializationHelper = ({
     children
 }:Props) => {
     const location = useLocation();
@@ -28,4 +28,4 @@ const DefaultWrapper = ({
     )
 }
 
-export default DefaultWrapper
+export default ReinitializationHelper
