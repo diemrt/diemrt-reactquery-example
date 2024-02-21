@@ -1,6 +1,6 @@
 import PostList from "../../components/lists/PostList/PostList.component"
 
-const PostsPage = () => {
+const Posts = () => {
   return (
     <>
         <h1>I miei post</h1>
@@ -9,4 +9,4 @@ const PostsPage = () => {
   )
 }
 
-export default PostsPage
+export default Posts
