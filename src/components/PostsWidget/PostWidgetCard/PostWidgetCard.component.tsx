@@ -1,4 +1,8 @@
+import { useContext } from "react";
+import { PostsContext } from "../../../pages/Welcome/utils";
+
 const PostWidgetCard = () => {
+  const posts = useContext(PostsContext)
   return (
     <div className="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-800">
       <div className="p-4 md:p-5 flex gap-x-4">
@@ -55,7 +59,7 @@ const PostWidgetCard = () => {
           </div>
           <div className="mt-1 flex items-center gap-x-2">
             <h3 className="text-xl sm:text-2xl font-medium text-gray-800 dark:text-gray-200">
-              72,540
+              {posts?.length ?? '0'}
             </h3>
             <span className="inline-flex items-center gap-x-1 py-0.5 px-2 rounded-full bg-green-100 text-green-900 dark:bg-green-800 dark:text-green-100">
               <svg
