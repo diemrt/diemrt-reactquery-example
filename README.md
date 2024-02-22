@@ -1,7 +1,33 @@
+
 # Esempio di un progetto con React Query + useReducer + useContext
+
+## Preambolo
+
+Questa guida contiene una serie di nozioni che, seguite punto per punto, mostrano come replicare un applicativo front-end, in grado di interagire con uno o più servizi API esterni, senza l'utilizzo della libreria `Redux Toolkit`.  
+
+Lo standard di riferimento è quanto più simile a quello adoperato fino ad oggi.
 
 ## Installazione
 
+Clonare il progetto dal repository remoto, dopodiché installare le dipendenze necessarie con il comando `npm install`. Prima di avviare l'applicazione assicurarsi che sia presente il file `.env` nella root del progetto.
+
+> Il progetto è stato creato tramite il build tool **Vite** e non tramite il setup di **Create React App**. Durante la fase di installazione è importante ricordarsi della differenza nella definizione delle variabili d'ambiente; in Vite le variabili d'ambiente seguono la convenzione `VITE_NOMEVARIABILE`, in Create React App il prefisso era differente.
+
+Per avviare il server in locale è possibile usare il comando `npm run dev`, questo avvierà lo script di dev configurato nel file `package.json`.
+
 ## Librerie usate
+
+Questa guida non vedrà nel dettaglio l'uso di ciascuna libreria usata nel progetto, molte delle librerie servono solo a rendere il progetto testabile a livello di front-end, ma non costituiscono uno standard di utilizzo. Sono riportate qua di seguito queste librerie supplementari e il link alla relativa documentazione:
+
+| Nome | Documentazione | 
+|--|--|
+| @hookform/error-message | https://react-hook-form.com/docs/useformstate/errormessage |
+| @preline/tooltip | https://preline.co/plugins/html/tooltip.html |
+| axios | https://axios-http.com/docs/intro |
+| preline | https://preline.co/docs/index.html |
+| react-hook-form | https://react-hook-form.com/get-started |
+| react-router-dom | https://reactrouter.com/en/main/start/overview |
+
+> Le `devDependencies` non sono presenti nella lista qua sopra, se non vengono nominate  nel corso della guida il loro scopo è stato solo quello di migliorare l'esperienza durante lo sviluppo del codice. Non costituiscono anche loro uno standard.
 
 ## Flusso di implementazione
