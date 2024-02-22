@@ -3,7 +3,9 @@
 
 ## Preambolo
 
-Questa guida contiene una serie di nozioni che, seguite punto per punto, mostrano come replicare un applicativo front-end, in grado di interagire con uno o più servizi API esterni, senza l'utilizzo della libreria `Redux Toolkit`.  Il risultato è stato ottenuto combinando gli hook nativi di React `useReducer` e `useContext`, introdotti nelle ultime versioni, con la libreria [React Query](https://github.com/tanstack/query) di Tanstack.
+Questa guida contiene una serie di nozioni che mostrano come implementare un applicativo front-end, in grado di interagire con uno o più servizi API esterni, senza l'utilizzo della libreria `Redux Toolkit`.  Il risultato è stato ottenuto combinando gli hook nativi di React `useReducer` e `useContext`, introdotti nelle ultime versioni, con la libreria [React Query](https://github.com/tanstack/query) di Tanstack.
+
+La guida non può essere usata come un tutorial, perché non contiene una serie di passaggi da seguire punto per punto.
 
 ## Motivazione
 
