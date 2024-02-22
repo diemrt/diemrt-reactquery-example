@@ -4,7 +4,7 @@ interface Props {
 const WithFullScreenSkeleton = (WrappedComponent: React.ElementType) => {
   const FullScreenSkeletonLoader = ({ isLoading, ...otherProps }: Props) => {
     return isLoading ? (
-      <div className="dark:bg-slate-900 flex h-full items-center py-16">
+      <div className="dark:bg-slate-900 flex h-screen items-center py-16">
         <main className="w-full max-w-md mx-auto p-6">
           <div className="flex animate-pulse">
             <div className="ms-4 mt-2 w-full">
