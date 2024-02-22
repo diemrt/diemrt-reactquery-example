@@ -53,15 +53,17 @@ export const getCurrentUser = () => {
 export const resetUserPassword = (email: string) => {
   return sendPasswordResetEmail(auth, email);
 };
-export enum FirebaseActionKind {
-  SUCCEEDED = 'succeeded'
-}
+export type FirebaseActionKind = "success" | "loading" | "error" | "pending";
 export interface FirebaseState {
-  user?: User
-} 
-export interface FirebaseAction {
-  type: FirebaseActionKind,
-  payload?: User
+  user?: User;
 }
-export const FirebaseContext = createContext<FirebaseState | undefined>(undefined)
-export const FirebaseDispatchContext = createContext<React.Dispatch<FirebaseAction> | undefined>(undefined)
+export interface FirebaseAction {
+  type: FirebaseActionKind;
+  payload?: User;
+}
+export const FirebaseContext = createContext<FirebaseState | undefined>(
+  undefined
+);
+export const FirebaseDispatchContext = createContext<
+  React.Dispatch<FirebaseAction> | undefined
+>(undefined);

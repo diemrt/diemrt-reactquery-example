@@ -1,9 +1,9 @@
-import { FirebaseAction, FirebaseActionKind, FirebaseState } from "./firebase.utils";
+import { FirebaseAction, FirebaseState } from "./firebase.utils";
 
 const firebaseReducer = (state: FirebaseState, action: FirebaseAction) => {
     const { type, payload} = action
     switch(type){
-        case FirebaseActionKind.SUCCEEDED:
+        case 'success':
             return {
                 ...state,
                 user: payload

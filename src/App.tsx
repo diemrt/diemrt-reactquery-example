@@ -7,7 +7,6 @@ import WithFullScreenSkeleton from "./components/WithFullScreenSkeleton/WithFull
 import { useEffect } from "react";
 import useFirebaseReducer from "./api/firebase/hooks/useFirebaseReducer.hook";
 import {
-  FirebaseActionKind,
   FirebaseContext,
   FirebaseDispatchContext,
 } from "./api/firebase/firebase.utils";
@@ -15,19 +14,17 @@ import {
 function App() {
   const AppRouterWithSkeleton = WithFullScreenSkeleton(AppRouter);
   const checkUserSessionsQueryOptions = checkUserSession();
-  const { isPending, isSuccess, data } = useQuery(
+  const { isPending, status, data } = useQuery(
     checkUserSessionsQueryOptions
   );
   const [state, dispatch] = useFirebaseReducer();
 
   useEffect(() => {
-    if (isSuccess) {
       dispatch({
-        type: FirebaseActionKind.SUCCEEDED,
+        type: status,
         payload: data?.user,
       });
-    }
-  });
+  }, [dispatch, data, status]);
 
   return (
     <>
