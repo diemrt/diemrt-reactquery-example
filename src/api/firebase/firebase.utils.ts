@@ -8,6 +8,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { createContext } from "react";
+import { ApiActionType } from "../utils";
 
 const config = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -53,12 +54,11 @@ export const getCurrentUser = () => {
 export const resetUserPassword = (email: string) => {
   return sendPasswordResetEmail(auth, email);
 };
-export type FirebaseActionKind = "success" | "loading" | "error" | "pending";
 export interface FirebaseState {
   user?: User;
 }
 export interface FirebaseAction {
-  type: FirebaseActionKind;
+  type: ApiActionType;
   payload?: User;
 }
 export const FirebaseContext = createContext<FirebaseState | undefined>(

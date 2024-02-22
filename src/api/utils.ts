@@ -91,6 +91,6 @@ export const apiQueryOptions = <T>(
         retry: 1
     })
 }
-
+export type ApiActionType = "success" | "loading" | "error" | "pending";
 const queryClient = new QueryClient()
 export default queryClient
