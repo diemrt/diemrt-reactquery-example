@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { createContext } from "react";
 
 const config = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -52,3 +53,15 @@ export const getCurrentUser = () => {
 export const resetUserPassword = (email: string) => {
   return sendPasswordResetEmail(auth, email);
 };
+export enum FirebaseActionKind {
+  SUCCEEDED = 'succeeded'
+}
+export interface FirebaseState {
+  user?: User
+} 
+export interface FirebaseAction {
+  type: FirebaseActionKind,
+  payload?: User
+}
+export const FirebaseContext = createContext<FirebaseState | undefined>(undefined)
+export const FirebaseDispatchContext = createContext<React.Dispatch<FirebaseAction> | undefined>(undefined)

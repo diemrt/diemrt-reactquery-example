@@ -7,8 +7,8 @@ export const checkUserSession = () =>
     queryFn: async () => {
       const user = await getCurrentUser();
       if (user) {
-        return { data: { user } };
+        return { user: user };
       }
-      return { data: null };
+      return { user: undefined };
     },
   });
