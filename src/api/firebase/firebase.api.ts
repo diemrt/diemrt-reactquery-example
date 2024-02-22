@@ -1,9 +1,15 @@
 import { queryOptions } from "@tanstack/react-query";
-import { TranslateFirebaseErrors, auth, getCurrentUser, translateFirebaseErrorMessage } from "./firebase.utils";
+import {
+  TranslateFirebaseErrors,
+  auth,
+  getCurrentUser,
+  translateFirebaseErrorMessage,
+} from "./firebase.utils";
 import { LoginFormFields } from "./firebase.types";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import queryClient from "../utils";
 
-export const checkUserSession = () =>
+export const checkUserSessionQuery = () =>
   queryOptions({
     queryKey: ["userSession"],
     queryFn: async () => {
@@ -32,6 +38,9 @@ export const loginMutation = () => {
         );
         return { error: message };
       }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["userSession"] });
     },
   };
 };
