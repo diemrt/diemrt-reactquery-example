@@ -3,9 +3,13 @@
 
 ## Preambolo
 
-Questa guida contiene una serie di nozioni che, seguite punto per punto, mostrano come replicare un applicativo front-end, in grado di interagire con uno o più servizi API esterni, senza l'utilizzo della libreria `Redux Toolkit`.  
+Questa guida contiene una serie di nozioni che, seguite punto per punto, mostrano come replicare un applicativo front-end, in grado di interagire con uno o più servizi API esterni, senza l'utilizzo della libreria `Redux Toolkit`.  Il risultato è stato ottenuto combinando gli hook nativi di React `useReducer` e `useContext`, introdotti nelle ultime versioni, con la libreria [React Query](https://github.com/tanstack/query) di Tanstack.
 
-Lo standard di riferimento è quanto più simile a quello adoperato fino ad oggi.
+## Motivazione
+
+Lo scopo è quello di snellire la complessità applicativa, rimuovendo la dipendenza da Redux per i progetti che fanno un uso molto limitato dello stato applicativo condiviso. Al momento la vera complessità dei nostri applicativi risiede nella gestione del data fetching, in Redux questa complessità era gestita tramite il tool integrato RTK Query. Tuttavia, come indicato nella [documentazione ufficiale](https://redux-toolkit.js.org/rtk-query/comparison), questo strumento è stato creato sulla base di librerie già consolidate nell'ambito, tra cui proprio React Query. Non essendo RTK Query il principio cardine per cui Redux esiste, vincolare progetti ad esso può diventare un passaggio non necessario. Ciononostante Redux rimane uno strumento molto valido per continuare a gestire queste complessità.
+ 
+Per un'approfondimento sull'argomento è possibile leggere alcuni articoli di Redux a questo [link](https://redux.js.org/faq/general#when-should-i-learn-redux).
 
 ## Installazione
 
@@ -19,14 +23,14 @@ Per avviare il server in locale è possibile usare il comando `npm run dev`, que
 
 Questa guida non vedrà nel dettaglio l'uso di ciascuna libreria usata nel progetto, molte delle librerie servono solo a rendere il progetto testabile a livello di front-end, ma non costituiscono uno standard di utilizzo. Sono riportate qua di seguito queste librerie supplementari e il link alla relativa documentazione:
 
-| Nome | Documentazione | 
-|--|--|
+| Nome                    | Documentazione                                             |
+| ----------------------- | ---------------------------------------------------------- |
 | @hookform/error-message | https://react-hook-form.com/docs/useformstate/errormessage |
-| @preline/tooltip | https://preline.co/plugins/html/tooltip.html |
-| axios | https://axios-http.com/docs/intro |
-| preline | https://preline.co/docs/index.html |
-| react-hook-form | https://react-hook-form.com/get-started |
-| react-router-dom | https://reactrouter.com/en/main/start/overview |
+| @preline/tooltip        | https://preline.co/plugins/html/tooltip.html               |
+| axios                   | https://axios-http.com/docs/intro                          |
+| preline                 | https://preline.co/docs/index.html                         |
+| react-hook-form         | https://react-hook-form.com/get-started                    |
+| react-router-dom        | https://reactrouter.com/en/main/start/overview             |
 
 > Le `devDependencies` non sono presenti nella lista qua sopra, se non vengono nominate  nel corso della guida il loro scopo è stato solo quello di migliorare l'esperienza durante lo sviluppo del codice. Non costituiscono anche loro uno standard.
 
