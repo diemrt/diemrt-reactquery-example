@@ -1,16 +1,28 @@
 import { NavLink } from "react-router-dom";
 import GenericInput from "../../components/forms/GenericInput/GenericInput.component";
 import { useForm } from "react-hook-form";
+import { LoginFormFields } from "../../api/firebase/firebase.types";
+import { useMutation } from "@tanstack/react-query";
+import { loginMutation } from "../../api/firebase/firebase.api";
+import { useEffect } from "react";
 
-type LoginFormFields = {
-  email: string;
-  password: string;
-};
 const Login = () => {
   const {
     register,
+    handleSubmit,
+    setFocus,
     formState: { errors },
   } = useForm<LoginFormFields>();
+  const mutation = useMutation(loginMutation())
+
+  const onSubmit = (values: LoginFormFields) => {
+    mutation.mutate(values)
+  }
+
+  useEffect(() => {
+    setFocus("email", { shouldSelect: true })
+  }, [setFocus])
+
   return (
     <div className="dark:bg-slate-900 bg-gray-100 flex h-screen items-center py-16">
       <main className="w-full max-w-md mx-auto p-6">
@@ -34,7 +46,7 @@ const Login = () => {
               <div className="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ms-6 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">
                 oppure
               </div>
-              <form>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid gap-y-4">
                   <GenericInput
                     label="Email"
@@ -46,9 +58,10 @@ const Login = () => {
                     rules={{
                       required: true,
                       pattern: {
-                        value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                        message: "Email non valida"
-                      }
+                        value:
+                          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        message: "Email non valida",
+                      },
                     }}
                   />
                   <GenericInput
