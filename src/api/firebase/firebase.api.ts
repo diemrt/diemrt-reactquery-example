@@ -4,6 +4,7 @@ import {
   auth,
   getCurrentUser,
   translateFirebaseErrorMessage,
+  userSignOut,
 } from "./firebase.utils";
 import { LoginFormFields } from "./firebase.types";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -38,6 +39,17 @@ export const loginMutation = () => {
         );
         return { error: message };
       }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["userSession"] });
+    },
+  };
+};
+export const logoutMutation = () => {
+  return {
+    mutationFn: async () => {
+      await userSignOut();
+      return null;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["userSession"] });

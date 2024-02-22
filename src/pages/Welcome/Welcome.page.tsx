@@ -6,6 +6,7 @@ import SidebarContent from "../../components/SidebarContent/SidebarContent.compo
 import SidebarToggle from "../../components/SidebarToggle/SidebarToggle.component";
 import WithSkeleton from "../../components/WithSkeleton/WithSkeleton.component";
 import { PostsContext } from "./utils";
+import Header from "../../components/Header/Header.component";
 
 const Welcome = () => {
   
@@ -15,6 +16,7 @@ const Welcome = () => {
 
   return (
     <PostsContext.Provider value={data}>
+      <Header />
       <SidebarToggle />
       <Sidebar />
       <SidebarContent>
