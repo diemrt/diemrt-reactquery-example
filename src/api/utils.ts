@@ -49,7 +49,7 @@ export const queryData = <T>(
 export const mutateData = <T>(
   url: string,
   accessToken: string | null,
-  params: object | null,
+  body: object | null,
   method: "POST" | "DELETE" | "PUT" | "PATCH"
 ) => {
   const reqHeaders = {
@@ -62,7 +62,7 @@ export const mutateData = <T>(
     headers: reqHeaders,
     method: method,
     url: url,
-    data: params,
+    data: body,
   })
     .then((response) => {
       return response.data;
