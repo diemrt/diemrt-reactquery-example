@@ -8,6 +8,12 @@ const firebaseReducer = (state: FirebaseState, action: FirebaseAction) => {
                 ...state,
                 user: payload
             }
+        case 'invalidate': {
+            return {
+                ...state,
+                user: undefined
+            }
+        }
         default:
             return state
     }
