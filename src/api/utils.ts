@@ -100,7 +100,8 @@ const queryClient = new QueryClient({
     onError: (err) => toast.warn(`Qualcosa è andato storto. ${err?.message || err}`)
   }),
   mutationCache: new MutationCache({
-    onError: (err) => toast.warn(`Qualcosa è andato storto. ${err?.message || err}`)
+    onError: (err) => toast.warn(`Qualcosa è andato storto. ${err?.message || err}`),
+    onSuccess: () => toast.success("Operazione avvenuta con successo!"),
   }),
 });
 export default queryClient;
