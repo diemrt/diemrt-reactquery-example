@@ -6,10 +6,12 @@ import { checkUserSessionQuery } from "./api/firebase/firebase.api";
 import WithFullScreenSkeleton from "./components/WithFullScreenSkeleton/WithFullScreenSkeleton.component";
 import { useEffect } from "react";
 import useFirebaseReducer from "./api/firebase/hooks/useFirebaseReducer.hook";
+import 'react-toastify/dist/ReactToastify.css';
 import {
   FirebaseContext,
   FirebaseDispatchContext,
 } from "./api/firebase/firebase.utils";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const AppRouterWithSkeleton = WithFullScreenSkeleton(AppRouter);
@@ -30,6 +32,7 @@ function App() {
     <>
       <FirebaseContext.Provider value={state}>
         <FirebaseDispatchContext.Provider value={dispatch}>
+          <ToastContainer autoClose={2000} />
           <AppRouterWithSkeleton isLoading={isPending} />
         </FirebaseDispatchContext.Provider>
       </FirebaseContext.Provider>

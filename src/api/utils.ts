@@ -1,5 +1,6 @@
-import { QueryClient, queryOptions } from "@tanstack/react-query";
+import { MutationCache, QueryCache, QueryClient, queryOptions } from "@tanstack/react-query";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const getRootUrl = () => {
   const cache: { [key: string]: string } = {};
@@ -94,5 +95,12 @@ export const apiQueryOptions = <T>({
   });
 };
 export type ApiActionType = "success" | "loading" | "error" | "pending";
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: (err) => toast.warn(`Qualcosa è andato storto. ${err?.message || err}`)
+  }),
+  mutationCache: new MutationCache({
+    onError: (err) => toast.warn(`Qualcosa è andato storto. ${err?.message || err}`)
+  }),
+});
 export default queryClient;

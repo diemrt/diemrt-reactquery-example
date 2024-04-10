@@ -1,9 +1,7 @@
 import { queryOptions } from "@tanstack/react-query";
 import {
-  TranslateFirebaseErrors,
   auth,
   getCurrentUser,
-  translateFirebaseErrorMessage,
   userSignOut,
 } from "./firebase.utils";
 import { LoginFormFields } from "./firebase.types";
@@ -24,25 +22,18 @@ export const checkUserSessionQuery = () =>
 export const loginMutation = () => {
   return {
     mutationFn: async ({ email, password }: LoginFormFields) => {
-      try {
-        const { user } = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        if (user) {
-          return { user: user };
-        }
-      } catch (error) {
-        const message = translateFirebaseErrorMessage(
-          error as TranslateFirebaseErrors
-        );
-        return { error: message };
+      const { user } = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      if (user) {
+        return { user: user };
       }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["userSession"] });
-    },
+    }
   };
 };
 export const logoutMutation = () => {
