@@ -4,11 +4,9 @@ import AppRouter from "./components/AppRouter/AppRouter.component";
 import "./index.css";
 import { checkUserSessionQuery } from "./api/firebase/firebase.api";
 import WithFullScreenSkeleton from "./components/WithFullScreenSkeleton/WithFullScreenSkeleton.component";
-import { useEffect } from "react";
-import useFirebaseReducer from "./api/firebase/hooks/useFirebaseReducer.hook";
+import { useContext, useEffect } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import {
-  FirebaseContext,
   FirebaseDispatchContext,
 } from "./api/firebase/firebase.utils";
 import { ToastContainer } from "react-toastify";
@@ -19,7 +17,7 @@ function App() {
   const { isPending, status, data } = useQuery(
     checkUserSessionsQueryOptions
   );
-  const [state, dispatch] = useFirebaseReducer();
+  const dispatch = useContext(FirebaseDispatchContext)
 
   useEffect(() => {
       dispatch({
@@ -30,12 +28,8 @@ function App() {
 
   return (
     <>
-      <FirebaseContext.Provider value={state}>
-        <FirebaseDispatchContext.Provider value={dispatch}>
-          <ToastContainer autoClose={2000} />
-          <AppRouterWithSkeleton isLoading={isPending} />
-        </FirebaseDispatchContext.Provider>
-      </FirebaseContext.Provider>
+      <ToastContainer autoClose={2000} />
+      <AppRouterWithSkeleton isLoading={isPending} />
       <ReactQueryDevtools initialIsOpen={false} />
     </>
   );
