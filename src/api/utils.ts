@@ -94,7 +94,6 @@ export const apiQueryOptions = <T>({
     retry: 1,
   });
 };
-export type ApiActionType = "success" | "loading" | "error" | "pending" | "invalidate";
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (err) => toast.warn(`Qualcosa è andato storto. ${err?.message || err}`)

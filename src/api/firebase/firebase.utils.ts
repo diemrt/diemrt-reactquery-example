@@ -8,7 +8,6 @@ import {
   signOut,
 } from "firebase/auth";
 import { createContext } from "react";
-import { ApiActionType } from "../utils";
 
 const config = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -82,7 +81,7 @@ export interface FirebaseState {
   user?: User;
 }
 export interface FirebaseAction {
-  type: ApiActionType;
+  type: string;
   payload?: User;
 }
 export const FirebaseContext = createContext<FirebaseState | undefined>(
