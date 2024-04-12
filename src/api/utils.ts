@@ -115,12 +115,12 @@ export const apiQueryOptions = <T>({
 export const apiMutationOptions = <T>({
   invalidateTags,
   url,
-  body,
+  body = null,
   method,
 }: {
   invalidateTags: string[];
   url: () => string;
-  body: object | null;
+  body?: object | null;
   method: "POST" | "DELETE" | "PUT" | "PATCH";
 }) => {
   return {

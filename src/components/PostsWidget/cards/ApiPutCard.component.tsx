@@ -1,30 +1,29 @@
-import { useQuery } from "@tanstack/react-query";
-import { readPostQuery } from "../../../api/posts/posts.api";
+import { useMutation } from "@tanstack/react-query";
+import { updatePostMutation } from "../../../api/posts/posts.api";
 import ButtonWithLoader from "../../ButtonWithLoader/ButtonWithLoader.component";
 import moment from "moment";
 
-const ApiGetByIdCard = () => {
+const ApiPutCard = () => {  
   const postId = "1"
-  const fetchPostQueryOptions = readPostQuery({id: postId});
-  const { data, isLoading, refetch, dataUpdatedAt } = useQuery(
-    fetchPostQueryOptions
+  const { mutate, isPending, isSuccess, data, submittedAt } = useMutation(
+    updatePostMutation({id: postId})
   );
 
   return (
     <div className="py-8 first:pt-0 last:pb-0">
       <div className="flex gap-x-5">
-        <span className="inline-flex h-fit items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-          GET
+        <span className="inline-flex h-fit items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">
+          PUT
         </span>
         <div className="w-full">
           <h3 className="md:text-lg font-semibold text-gray-800 dark:text-gray-200">
             /posts/:postId
           </h3>
           <p className="mt-1 w-full text-gray-500">
-            Ottiene il dettaglio di un singolo post.
+            Permette di aggiornare un singolo post.
           </p>
           <div className="w-full mt-5">
-            {data && (
+            {isSuccess && (
               <>
                 <div>
                   <span className="py-1 px-2 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
@@ -43,7 +42,7 @@ const ApiGetByIdCard = () => {
                       <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
                       <path d="m9 12 2 2 4-4" />
                     </svg>
-                    {moment(dataUpdatedAt).format()}
+                    {moment(submittedAt).format()}
                   </span>
                 </div>
                 <textarea
@@ -57,7 +56,7 @@ const ApiGetByIdCard = () => {
             )}
           </div>
           <div className="flex flex-row gap-5 mt-5">
-            <ButtonWithLoader onClick={refetch} isLoading={isLoading}>
+            <ButtonWithLoader onClick={mutate} isLoading={isPending}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -78,4 +77,4 @@ const ApiGetByIdCard = () => {
   );
 };
 
-export default ApiGetByIdCard;
+export default ApiPutCard;

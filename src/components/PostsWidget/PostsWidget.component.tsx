@@ -1,6 +1,8 @@
+import ApiDeleteCard from "./cards/ApiDeleteCard.component";
 import ApiGetAllCard from "./cards/ApiGetAllCard.component";
 import ApiGetByIdCard from "./cards/ApiGetByIdCard.component";
 import ApiPostCard from "./cards/ApiPostCard.component copy";
+import ApiPutCard from "./cards/ApiPutCard.component";
 
 const PostsWidget = () => {
   return (
@@ -26,6 +28,8 @@ const PostsWidget = () => {
               <ApiGetAllCard />
               <ApiGetByIdCard />
               <ApiPostCard />
+              <ApiPutCard />
+              <ApiDeleteCard />
             </div>
             {/* End Accordion */}
           </div>

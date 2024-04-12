@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchPostsQuery } from "../../../api/posts/posts.api";
+import { readPostsQuery } from "../../../api/posts/posts.api";
 import ButtonWithLoader from "../../ButtonWithLoader/ButtonWithLoader.component";
 import moment from "moment";
 
 const ApiGetAllCard = () => {
-  const fetchPostsQueryOptions = fetchPostsQuery();
+  const fetchPostsQueryOptions = readPostsQuery();
   const { data, isLoading, refetch, dataUpdatedAt } = useQuery(
     fetchPostsQueryOptions
   );
