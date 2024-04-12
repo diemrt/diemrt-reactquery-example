@@ -1,4 +1,9 @@
-import { MutationCache, QueryCache, QueryClient, queryOptions } from "@tanstack/react-query";
+import {
+  MutationCache,
+  QueryCache,
+  QueryClient,
+  queryOptions,
+} from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -83,23 +88,45 @@ export const mutateData = <T>(
 
 export const apiQueryOptions = <T>({
   providesTags,
-  query,
+  url,
 }: {
   providesTags: string[];
-  query: () => string;
+  url: () => string;
 }) => {
   return queryOptions({
     queryKey: providesTags,
-    queryFn: () => queryData<T>(`${getAPIUrl()}${query()}`),
+    queryFn: () => queryData<T>(`${getAPIUrl()}${url()}`),
     retry: 1,
   });
 };
+
+export const apiMutationOptions = <T>({
+  invalidateTags,
+  url,
+  body,
+  method,
+}: {
+  invalidateTags: string[];
+  url: () => string;
+  body: object | null;
+  method: "POST" | "DELETE" | "PUT" | "PATCH";
+}) => {
+  return {
+    mutationFn: mutateData<T>(`${getAPIUrl()}${url()}`, null, body, method),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: invalidateTags });
+    },
+  };
+};
+
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
-    onError: (err) => toast.warn(`Qualcosa è andato storto. ${err?.message || err}`)
+    onError: (err) =>
+      toast.warn(`Qualcosa è andato storto. ${err?.message || err}`),
   }),
   mutationCache: new MutationCache({
-    onError: (err) => toast.warn(`Qualcosa è andato storto. ${err?.message || err}`),
+    onError: (err) =>
+      toast.warn(`Qualcosa è andato storto. ${err?.message || err}`),
     onSuccess: () => toast.success("Operazione avvenuta con successo!"),
   }),
 });

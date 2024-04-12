@@ -2,6 +2,6 @@ import { apiQueryOptions } from "../utils"
 import { Posts } from "./posts.types"
 
 export const fetchPostsQuery = () => apiQueryOptions<Posts>({
-    query: () => `/posts`,
+    url: () => `/posts`,
     providesTags: ['posts']
 })
