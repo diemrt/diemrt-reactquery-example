@@ -1,4 +1,4 @@
-import { KeyValueItem, apiQueryOptions } from "../utils"
+import { KeyValueItem, apiMutationOptions, apiQueryOptions } from "../utils"
 
 export const fetchPostsQuery = () => apiQueryOptions<KeyValueItem>({
     url: () => `/posts`,
@@ -10,4 +10,11 @@ export const fetchPostQuery = ({id} : {id: string}) => apiQueryOptions<KeyValueI
     url: () => `/posts/${id}`,
     providesTags: ['posts', id],
     enabled: false
+})
+
+export const createPostMutation = () => apiMutationOptions<KeyValueItem>({
+    url: () => `/posts`,
+    invalidateTags: ['posts'],
+    body: {},
+    method: "POST"
 })

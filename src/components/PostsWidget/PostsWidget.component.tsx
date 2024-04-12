@@ -1,4 +1,6 @@
 import GetAllCard from "./cards/GetAllCard.component";
+import GetByIdCard from "./cards/GetByIdCard.component";
+import PostCard from "./cards/PostCard.component copy";
 
 const PostsWidget = () => {
   return (
@@ -22,6 +24,8 @@ const PostsWidget = () => {
             {/* Accordion */}
             <div className="hs-accordion-group divide-y divide-gray-200 dark:divide-gray-700">
               <GetAllCard />
+              <GetByIdCard />
+              <PostCard />
             </div>
             {/* End Accordion */}
           </div>
