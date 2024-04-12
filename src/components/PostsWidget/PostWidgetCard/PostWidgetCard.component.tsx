@@ -1,10 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchPostsQuery } from "../../../api/posts/posts.api";
 import ButtonWithLoader from "../../ButtonWithLoader/ButtonWithLoader.component";
+import moment from "moment";
 
 const PostWidgetCard = () => {
   const fetchPostsQueryOptions = fetchPostsQuery();
-  const { data, isLoading, refetch } = useQuery(fetchPostsQueryOptions);
+  const { data, isLoading, refetch, dataUpdatedAt } = useQuery(
+    fetchPostsQueryOptions
+  );
 
   return (
     <div className="py-8 first:pt-0 last:pb-0">
@@ -21,14 +24,35 @@ const PostWidgetCard = () => {
           </p>
           <div className="w-full mt-5">
             {data && (
-              <textarea
-                
-                id="textarea-label"
-                className="py-3 px-4 mt-3 block w-full bg-green-50 border-green-600 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                rows={3}
-                placeholder="Risposta"
-                value={JSON.stringify(data)}
-              />
+              <>
+                <div>
+                  <span className="py-1 px-2 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                    <svg
+                      className="flex-shrink-0 size-3"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                      <path d="m9 12 2 2 4-4" />
+                    </svg>
+                    {moment(dataUpdatedAt).format()}
+                  </span>
+                </div>
+                <textarea
+                  id="textarea-label"
+                  className="py-3 px-4 mt-3 block w-full bg-green-50 border-green-600 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                  rows={3}
+                  placeholder="Risposta"
+                  value={JSON.stringify(data)}
+                />
+              </>
             )}
           </div>
           <div className="flex flex-row gap-5 mt-5">
