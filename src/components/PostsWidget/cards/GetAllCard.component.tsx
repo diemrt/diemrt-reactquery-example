@@ -3,7 +3,7 @@ import { fetchPostsQuery } from "../../../api/posts/posts.api";
 import ButtonWithLoader from "../../ButtonWithLoader/ButtonWithLoader.component";
 import moment from "moment";
 
-const PostWidgetCard = () => {
+const GetAllCard = () => {
   const fetchPostsQueryOptions = fetchPostsQuery();
   const { data, isLoading, refetch, dataUpdatedAt } = useQuery(
     fetchPostsQueryOptions
@@ -77,4 +77,4 @@ const PostWidgetCard = () => {
   );
 };
 
-export default PostWidgetCard;
+export default GetAllCard;

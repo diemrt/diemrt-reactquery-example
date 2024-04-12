@@ -1,8 +1,13 @@
-import { apiQueryOptions } from "../utils"
-import { Posts } from "./posts.types"
+import { KeyValueItem, apiQueryOptions } from "../utils"
 
-export const fetchPostsQuery = () => apiQueryOptions<Posts>({
+export const fetchPostsQuery = () => apiQueryOptions<KeyValueItem>({
     url: () => `/posts`,
     providesTags: ['posts'],
+    enabled: false
+})
+
+export const fetchPostQuery = ({id} : {id: string}) => apiQueryOptions<KeyValueItem>({
+    url: () => `/posts/${id}`,
+    providesTags: ['posts', id],
     enabled: false
 })

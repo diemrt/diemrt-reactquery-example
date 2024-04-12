@@ -1,4 +1,4 @@
-import PostWidgetCard from "./PostWidgetCard/PostWidgetCard.component";
+import GetAllCard from "./cards/GetAllCard.component";
 
 const PostsWidget = () => {
   return (
@@ -21,7 +21,7 @@ const PostsWidget = () => {
           <div className="md:col-span-3">
             {/* Accordion */}
             <div className="hs-accordion-group divide-y divide-gray-200 dark:divide-gray-700">
-              <PostWidgetCard />
+              <GetAllCard />
             </div>
             {/* End Accordion */}
           </div>

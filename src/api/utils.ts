@@ -151,3 +151,6 @@ const queryClient = new QueryClient({
   }),
 });
 export default queryClient;
+export type KeyValueItem = {
+  [key: string]: string
+}
