@@ -1,4 +1,3 @@
-import ButtonWithLoader from "../ButtonWithLoader/ButtonWithLoader.component";
 import PostWidgetCard from "./PostWidgetCard/PostWidgetCard.component";
 
 const PostsWidget = () => {
@@ -22,24 +21,7 @@ const PostsWidget = () => {
           <div className="md:col-span-3">
             {/* Accordion */}
             <div className="hs-accordion-group divide-y divide-gray-200 dark:divide-gray-700">
-              <div className="py-8 first:pt-0 last:pb-0">
-                <div className="flex gap-x-5">
-                  <span class="inline-flex h-fit items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                    GET
-                  </span>
-                  <div>
-                    <h3 className="md:text-lg font-semibold text-gray-800 dark:text-gray-200">
-                      /posts
-                    </h3>
-                    <p className="mt-1 text-gray-500">
-                      Ottiene la lista dei post disponibili.
-                    </p>
-                    <div className="flex flex-row gap-5 mt-2">
-                      <ButtonWithLoader />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <PostWidgetCard />
             </div>
             {/* End Accordion */}
           </div>

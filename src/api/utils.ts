@@ -90,9 +90,11 @@ export const mutateData = <T>(
 export const apiQueryOptions = <T>({
   providesTags,
   url,
+  enabled = true
 }: {
   providesTags: string[];
   url: () => string;
+  enabled?: boolean
 }) => {
   return queryOptions({
     queryKey: providesTags,
@@ -105,6 +107,7 @@ export const apiQueryOptions = <T>({
           .catch((error) => reject(error));
       });
     },
+    enabled: enabled,
     retry: 1,
   });
 };
