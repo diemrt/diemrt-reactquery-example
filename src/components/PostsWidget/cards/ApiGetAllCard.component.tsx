@@ -1,13 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchPostQuery } from "../../../api/posts/posts.api";
+import { fetchPostsQuery } from "../../../api/posts/posts.api";
 import ButtonWithLoader from "../../ButtonWithLoader/ButtonWithLoader.component";
 import moment from "moment";
 
-const GetByIdCard = () => {
-  const postId = "1"
-  const fetchPostQueryOptions = fetchPostQuery({id: postId});
+const ApiGetAllCard = () => {
+  const fetchPostsQueryOptions = fetchPostsQuery();
   const { data, isLoading, refetch, dataUpdatedAt } = useQuery(
-    fetchPostQueryOptions
+    fetchPostsQueryOptions
   );
 
   return (
@@ -18,10 +17,10 @@ const GetByIdCard = () => {
         </span>
         <div className="w-full">
           <h3 className="md:text-lg font-semibold text-gray-800 dark:text-gray-200">
-            /posts/:postId
+            /posts
           </h3>
           <p className="mt-1 w-full text-gray-500">
-            Ottiene il dettaglio di un singolo post.
+            Ottiene la lista dei post disponibili.
           </p>
           <div className="w-full mt-5">
             {data && (
@@ -78,4 +77,4 @@ const GetByIdCard = () => {
   );
 };
 
-export default GetByIdCard;
+export default ApiGetAllCard;

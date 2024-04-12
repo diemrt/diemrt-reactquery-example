@@ -1,18 +1,20 @@
-import { useMutation } from "@tanstack/react-query";
-import { createPostMutation } from "../../../api/posts/posts.api";
+import { useQuery } from "@tanstack/react-query";
+import { fetchPostQuery } from "../../../api/posts/posts.api";
 import ButtonWithLoader from "../../ButtonWithLoader/ButtonWithLoader.component";
 import moment from "moment";
 
-const PostCard = () => {
-  const { mutate, isPending, isSuccess, data, submittedAt } = useMutation(
-    createPostMutation()
+const ApiGetByIdCard = () => {
+  const postId = "1"
+  const fetchPostQueryOptions = fetchPostQuery({id: postId});
+  const { data, isLoading, refetch, dataUpdatedAt } = useQuery(
+    fetchPostQueryOptions
   );
 
   return (
     <div className="py-8 first:pt-0 last:pb-0">
       <div className="flex gap-x-5">
-        <span className="inline-flex h-fit items-center rounded-md bg-orange-50 px-2 py-1 text-xs font-medium text-orange-700 ring-1 ring-inset ring-orange-600/20">
-          POST
+        <span className="inline-flex h-fit items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+          GET
         </span>
         <div className="w-full">
           <h3 className="md:text-lg font-semibold text-gray-800 dark:text-gray-200">
@@ -22,7 +24,7 @@ const PostCard = () => {
             Ottiene il dettaglio di un singolo post.
           </p>
           <div className="w-full mt-5">
-            {isSuccess && (
+            {data && (
               <>
                 <div>
                   <span className="py-1 px-2 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
@@ -41,7 +43,7 @@ const PostCard = () => {
                       <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
                       <path d="m9 12 2 2 4-4" />
                     </svg>
-                    {moment(submittedAt).format()}
+                    {moment(dataUpdatedAt).format()}
                   </span>
                 </div>
                 <textarea
@@ -55,7 +57,7 @@ const PostCard = () => {
             )}
           </div>
           <div className="flex flex-row gap-5 mt-5">
-            <ButtonWithLoader onClick={mutate} isLoading={isPending}>
+            <ButtonWithLoader onClick={refetch} isLoading={isLoading}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -76,4 +78,4 @@ const PostCard = () => {
   );
 };
 
-export default PostCard;
+export default ApiGetByIdCard;
