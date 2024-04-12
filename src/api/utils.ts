@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { getCurrentUser } from "./firebase/firebase.utils";
 
 const getRootUrl = () => {
   const cache: { [key: string]: string } = {};
@@ -95,7 +96,15 @@ export const apiQueryOptions = <T>({
 }) => {
   return queryOptions({
     queryKey: providesTags,
-    queryFn: () => queryData<T>(`${getAPIUrl()}${url()}`),
+    queryFn: () => {
+      return new Promise<T>((resolve, reject) => {
+        getCurrentUser()
+          .then((user) => user.getIdToken())
+          .then((accessToken) => queryData<T>(`${getAPIUrl()}${url()}`, accessToken))
+          .then((data) => resolve(data))
+          .catch((error) => reject(error));
+      });
+    },
     retry: 1,
   });
 };
@@ -112,7 +121,15 @@ export const apiMutationOptions = <T>({
   method: "POST" | "DELETE" | "PUT" | "PATCH";
 }) => {
   return {
-    mutationFn: mutateData<T>(`${getAPIUrl()}${url()}`, null, body, method),
+    mutationFn: () => {
+      return new Promise<T>((resolve, reject) => {
+        getCurrentUser()
+          .then((user) => user.getIdToken())
+          .then((accessToken) => mutateData<T>(`${getAPIUrl()}${url()}`, accessToken, body, method))
+          .then((data) => resolve(data))
+          .catch((error) => reject(error));
+      });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: invalidateTags });
     },
