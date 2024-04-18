@@ -3,8 +3,8 @@ import GenericInput from "../../components/forms/GenericInput/GenericInput.compo
 import { useForm } from "react-hook-form";
 import { LoginFormFields } from "../../api/firebase/firebase.types";
 import { useMutation } from "@tanstack/react-query";
-import { loginMutation } from "../../api/firebase/firebase.api";
 import { useEffect } from "react";
+import { loginMutation } from "../../api/oauth/oauth.api";
 
 const Login = () => {
   const {

@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import AppRouter from "./components/AppRouter/AppRouter.component";
 import "./index.css";
-import { checkUserSessionQuery } from "./api/firebase/firebase.api";
 import WithFullScreenSkeleton from "./components/WithFullScreenSkeleton/WithFullScreenSkeleton.component";
 import { useContext, useEffect } from "react";
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,6 +9,7 @@ import {
   FirebaseDispatchContext,
 } from "./api/firebase/firebase.utils";
 import { ToastContainer } from "react-toastify";
+import { checkUserSessionQuery } from "./api/oauth/oauth.api";
 
 function App() {
   const AppRouterWithSkeleton = WithFullScreenSkeleton(AppRouter);
