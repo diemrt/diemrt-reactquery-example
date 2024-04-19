@@ -5,9 +5,9 @@ import { Action } from "../utils";
 
 //Creao il client per l'accesso ai metodi del protocollo oauth usando le configurazioni di test
 export const client = new UserManager({
-    authority: "https://dev-q6m5tuju4skbacty.us.auth0.com",
-    client_id: "U1T0PItPSBGH4Fwo3ZA2IOIQ7jghx11N",
-    redirect_uri: "",
+    authority: import.meta.env.VITE_OAUTH_AUTHORITY,
+    client_id: import.meta.env.VITE_OAUTH_CLIENT_ID,
+    redirect_uri: import.meta.env.VITE_OAUTH_REDIRECT_URI,
     userStore: new WebStorageStateStore({
         store: window.localStorage
     })
