@@ -1,6 +1,8 @@
-import { FirebaseAction, FirebaseState } from "./firebase.utils";
+import { User } from "oidc-client-ts";
+import { AuthState } from "../../hooks/useOauthReducer.hook";
+import { Action } from "../utils";
 
-const firebaseReducer = (state: FirebaseState, action: FirebaseAction) => {
+const oauthReducer = (state: AuthState, action: Action<User>) => {
     const { type, payload} = action
     switch(type){
         case 'success':
@@ -18,4 +20,4 @@ const firebaseReducer = (state: FirebaseState, action: FirebaseAction) => {
             return state
     }
 }
-export default firebaseReducer
+export default oauthReducer

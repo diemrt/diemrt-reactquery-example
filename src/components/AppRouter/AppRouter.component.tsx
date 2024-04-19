@@ -3,10 +3,10 @@ import Welcome from "../../pages/Welcome/Welcome.page"
 import ReinitializationHelper from "../ReinitializationHelper/ReinitializationHelper.component"
 import NotFound from "../../pages/NotFound/NotFound.component"
 import { useContext } from "react"
-import { FirebaseContext } from "../../api/firebase/firebase.utils"
 import Login from "../../pages/Login/Login.page"
+import { OauthContext } from "../../api/oauth/oauth.utils"
 const AppRouter = () => {
-  const state = useContext(FirebaseContext)
+  const state = useContext(OauthContext)
   const isUserLoggedIn = state?.user ? true : false
   return (
     <BrowserRouter>

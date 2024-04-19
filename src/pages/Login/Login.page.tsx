@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 import GenericInput from "../../components/forms/GenericInput/GenericInput.component";
 import { useForm } from "react-hook-form";
-import { LoginFormFields } from "../../api/firebase/firebase.types";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { loginMutation } from "../../api/oauth/oauth.api";
+import { LoginFormFields } from "../../api/utils";
 
 const Login = () => {
   const {

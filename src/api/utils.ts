@@ -6,7 +6,7 @@ import {
 } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { getCurrentUser } from "./firebase/firebase.utils";
+import { client } from "./oauth/oauth.utils";
 
 const getRootUrl = () => {
   const cache: { [key: string]: string } = {};
@@ -90,19 +90,21 @@ export const mutateData = <T>(
 export const apiQueryOptions = <T>({
   providesTags,
   url,
-  enabled = true
+  enabled = true,
 }: {
   providesTags: string[];
   url: () => string;
-  enabled?: boolean
+  enabled?: boolean;
 }) => {
   return queryOptions({
     queryKey: providesTags,
     queryFn: () => {
       return new Promise<T>((resolve, reject) => {
-        getCurrentUser()
-          .then((user) => user.getIdToken())
-          .then((accessToken) => queryData<T>(`${getAPIUrl()}${url()}`, accessToken))
+        client.getUser()
+          .then((user) => user?.access_token)
+          .then((accessToken) =>
+            queryData<T>(`${getAPIUrl()}${url()}`, accessToken)
+          )
           .then((data) => resolve(data))
           .catch((error) => reject(error));
       });
@@ -126,9 +128,11 @@ export const apiMutationOptions = <T>({
   return {
     mutationFn: () => {
       return new Promise<T>((resolve, reject) => {
-        getCurrentUser()
-          .then((user) => user.getIdToken())
-          .then((accessToken) => mutateData<T>(`${getAPIUrl()}${url()}`, accessToken, body, method))
+        client.getUser()
+          .then((user) => user?.access_token)
+          .then((accessToken) =>
+            mutateData<T>(`${getAPIUrl()}${url()}`, accessToken, body, method)
+          )
           .then((data) => resolve(data))
           .catch((error) => reject(error));
       });
@@ -152,5 +156,13 @@ const queryClient = new QueryClient({
 });
 export default queryClient;
 export type KeyValueItem = {
-  [key: string]: string
-}
+  [key: string]: string;
+};
+export type Action<T> = {
+  type: string;
+  payload?: T;
+};
+export type LoginFormFields = {
+  email: string;
+  password: string;
+};

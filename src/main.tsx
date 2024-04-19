@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import { QueryClientProvider } from '@tanstack/react-query'
 import queryClient from './api/utils.ts'
-import FirebaseReducer from './components/reducers/FirebaseReducer/FirebaseReducer.component.tsx'
+import OauthReducer from './components/reducers/OauthReducer/OauthReducer.component.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <FirebaseReducer>
+      <OauthReducer>
         <App />
-      </FirebaseReducer>
+      </OauthReducer>
     </QueryClientProvider>
   </React.StrictMode>,
 )

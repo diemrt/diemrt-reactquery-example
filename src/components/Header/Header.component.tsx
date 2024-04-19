@@ -1,11 +1,8 @@
 import { useContext } from "react";
-import {
-  FirebaseDispatchContext,
-} from "../../api/firebase/firebase.utils";
-import { client } from "../../api/oauth/oauth.utils";
+import { OauthDispatchContext, client } from "../../api/oauth/oauth.utils";
 
 const Header = () => {
-  const dispatch = useContext(FirebaseDispatchContext);
+  const dispatch = useContext(OauthDispatchContext);
   const logout = () => {
     client.removeUser()
     dispatch({

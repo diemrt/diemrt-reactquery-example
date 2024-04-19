@@ -5,11 +5,9 @@ import "./index.css";
 import WithFullScreenSkeleton from "./components/WithFullScreenSkeleton/WithFullScreenSkeleton.component";
 import { useContext, useEffect } from "react";
 import 'react-toastify/dist/ReactToastify.css';
-import {
-  FirebaseDispatchContext,
-} from "./api/firebase/firebase.utils";
 import { ToastContainer } from "react-toastify";
 import { checkUserSessionQuery } from "./api/oauth/oauth.api";
+import { OauthDispatchContext } from "./api/oauth/oauth.utils";
 
 function App() {
   const AppRouterWithSkeleton = WithFullScreenSkeleton(AppRouter);
@@ -17,7 +15,7 @@ function App() {
   const { isPending, status, data } = useQuery(
     checkUserSessionsQueryOptions
   );
-  const dispatch = useContext(FirebaseDispatchContext)
+  const dispatch = useContext(OauthDispatchContext)
 
   useEffect(() => {
       dispatch({

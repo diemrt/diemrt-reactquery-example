@@ -1,4 +1,7 @@
-import { UserManager, WebStorageStateStore } from "oidc-client-ts";
+import { User, UserManager, WebStorageStateStore } from "oidc-client-ts";
+import { createContext } from "react";
+import { AuthState } from "../../hooks/useOauthReducer.hook";
+import { Action } from "../utils";
 
 //Creao il client per l'accesso ai metodi del protocollo oauth usando le configurazioni di test
 export const client = new UserManager({
@@ -9,3 +12,8 @@ export const client = new UserManager({
         store: window.localStorage
     })
 })
+  
+export const OauthContext = createContext<AuthState | undefined>(undefined);
+export const OauthDispatchContext = createContext<
+  React.Dispatch<Action<User>> | undefined
+>(undefined);
