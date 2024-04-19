@@ -2,14 +2,12 @@ import { useContext } from "react";
 import {
   FirebaseDispatchContext,
 } from "../../api/firebase/firebase.utils";
-import { useMutation } from "@tanstack/react-query";
-import { logoutMutation } from "../../api/firebase/firebase.api";
+import { client } from "../../api/oauth/oauth.utils";
 
 const Header = () => {
   const dispatch = useContext(FirebaseDispatchContext);
-  const mutation = useMutation(logoutMutation());
   const logout = () => {
-    mutation.mutate();
+    client.removeUser()
     dispatch({
       type: "invalidate",
     });

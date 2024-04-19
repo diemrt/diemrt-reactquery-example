@@ -13,6 +13,7 @@ export const loginMutation = () => {
           })
           .then((user) => {
             if (user) {
+              client.storeUser(user);
               resolve({ user: user });
             } else {
               reject("No user found");
@@ -22,28 +23,29 @@ export const loginMutation = () => {
             reject(error);
           });
       });
-    },    
+    },
     onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["userSession"] });
-      },
+      queryClient.invalidateQueries({ queryKey: ["userSession"] });
+    },
   };
 };
 export const checkUserSessionQuery = () =>
-    queryOptions({
-      queryKey: ["userSession"],
-      queryFn: () => {
-        return new Promise((resolve, reject) => {
-          client.getUser()
-            .then((user) => {
-              if (user) {
-                resolve({ user: user });
-              } else {
-                resolve({ user: undefined });
-              }
-            })
-            .catch((error) => {
-              reject(error);
-            });
-        });
-      },
-    });
+  queryOptions({
+    queryKey: ["userSession"],
+    queryFn: () => {
+      return new Promise((resolve, reject) => {
+        client
+          .getUser()
+          .then((user) => {
+            if (user) {
+              resolve({ user: user });
+            } else {
+              resolve({ user: undefined });
+            }
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
+  });
