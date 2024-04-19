@@ -101,7 +101,7 @@ export const apiQueryOptions = <T>({
     queryFn: () => {
       return new Promise<T>((resolve, reject) => {
         client.getUser()
-          .then((user) => user?.access_token)
+          .then((user) => user?.id_token)
           .then((accessToken) =>
             queryData<T>(`${getAPIUrl()}${url()}`, accessToken)
           )
@@ -129,7 +129,7 @@ export const apiMutationOptions = <T>({
     mutationFn: () => {
       return new Promise<T>((resolve, reject) => {
         client.getUser()
-          .then((user) => user?.access_token)
+          .then((user) => user?.id_token)
           .then((accessToken) =>
             mutateData<T>(`${getAPIUrl()}${url()}`, accessToken, body, method)
           )
