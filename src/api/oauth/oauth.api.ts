@@ -49,3 +49,20 @@ export const checkUserSessionQuery = () =>
       });
     },
   });
+  export const logoutMutation = () => {
+    return {
+      mutationFn: () => {
+        return new Promise((resolve, reject) => {
+          client
+            .removeUser()
+            .then(() => resolve(undefined))
+            .catch((error) => {
+              reject(error);
+            });
+        });
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["userSession"] });
+      },
+    };
+  };

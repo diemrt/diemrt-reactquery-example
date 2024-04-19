@@ -1,14 +1,20 @@
-import { useContext } from "react";
-import { OauthDispatchContext, client } from "../../api/oauth/oauth.utils";
+import { useContext, useEffect } from "react";
+import { OauthDispatchContext } from "../../api/oauth/oauth.utils";
+import { useMutation } from "@tanstack/react-query";
+import { logoutMutation } from "../../api/oauth/oauth.api";
 
 const Header = () => {
   const dispatch = useContext(OauthDispatchContext);
-  const logout = () => {
-    client.removeUser()
-    dispatch({
-      type: "invalidate",
-    });
-  };
+  const { mutate: logout, status, isSuccess } = useMutation(logoutMutation());
+
+  useEffect(() => {    
+    if (isSuccess) {
+      dispatch({
+        type: "invalidate",
+      });
+    }
+  }, [isSuccess, status, dispatch])
+
   return (
     <header className="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-4 lg:ps-64 dark:bg-gray-800 dark:border-gray-700">
       <nav
