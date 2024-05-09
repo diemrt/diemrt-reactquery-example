@@ -4,7 +4,7 @@ import SidebarContent from "../../components/SidebarContent/SidebarContent";
 import SidebarToggle from "../../components/SidebarToggle/SidebarToggle";
 import Header from "../../components/Header/Header";
 
-const WelcomePage = () => {
+const HomePage = () => {
   return (
     <>
       <Header />
@@ -17,4 +17,4 @@ const WelcomePage = () => {
   );
 };
 
-export default WelcomePage;
+export default HomePage;
