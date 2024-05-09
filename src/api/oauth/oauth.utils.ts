@@ -1,6 +1,6 @@
 import { User, UserManager, WebStorageStateStore } from "oidc-client-ts";
 import { createContext } from "react";
-import { AuthState } from "../../hooks/useOauthReducer.hook";
+import { AuthState } from "../../hooks/useOauthReducerHook";
 import { Action } from "../utils";
 
 //Creao il client per l'accesso ai metodi del protocollo oauth usando le configurazioni di test

@@ -1,5 +1,5 @@
 import { User } from "oidc-client-ts";
-import { AuthState } from "../../hooks/useOauthReducer.hook";
+import { AuthState } from "../../hooks/useOauthReducerHook";
 import { Action } from "../utils";
 
 const oauthReducer = (state: AuthState, action: Action<User>) => {

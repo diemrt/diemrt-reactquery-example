@@ -2,13 +2,13 @@ import { useContext, useEffect } from "react";
 import { checkUserSessionQuery } from "../../api/oauth/oauth.api";
 import { useQuery } from "@tanstack/react-query";
 import { OauthDispatchContext } from "../../api/oauth/oauth.utils";
-import WithFullScreenSkeleton from "../../components/WithFullScreenSkeleton/WithFullScreenSkeleton.component";
-import Welcome from "../Welcome/Welcome.page";
-import Login from "../Login/Login.page";
+import WithFullScreenSkeleton from "../../components/WithFullScreenSkeleton/WithFullScreenSkeleton";
+import WelcomePage from "../WelcomePage/WelcomePage";
+import LoginPage from "../LoginPage/LoginPage";
 
-const LoginOrNot = () => {
-  const WelcomeWithSkeleton = WithFullScreenSkeleton(Welcome);
-  const LoginWithSkeleton = WithFullScreenSkeleton(Login);
+const LandingPage = () => {
+  const WelcomeWithSkeleton = WithFullScreenSkeleton(WelcomePage);
+  const LoginWithSkeleton = WithFullScreenSkeleton(LoginPage);
   const checkUserSessionsQueryOptions = checkUserSessionQuery();
   const { isPending, status, data } = useQuery(checkUserSessionsQueryOptions);
   const dispatch = useContext(OauthDispatchContext);
@@ -29,4 +29,4 @@ const LoginOrNot = () => {
   );
 };
 
-export default LoginOrNot;
+export default LandingPage;

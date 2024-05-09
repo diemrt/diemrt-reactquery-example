@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
 
-const NotFound = () => {
+const NotFoundPage = () => {
   return (
     <div className="max-w-[50rem] flex flex-col mx-auto size-full">
         <div className="text-center py-32 px-4 sm:px-6 lg:px-8">
@@ -24,4 +24,4 @@ const NotFound = () => {
   )
 }
 
-export default NotFound
+export default NotFoundPage

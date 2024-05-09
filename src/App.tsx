@@ -1,5 +1,5 @@
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import AppRouter from "./components/AppRouter/AppRouter.component";
+import AppRouter from "./components/AppRouter/AppRouter";
 import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";

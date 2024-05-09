@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
-import GenericInput from "../../components/forms/GenericInput/GenericInput.component";
+import GenericInput from "../../components/forms/GenericInput/GenericInput";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { loginMutation } from "../../api/oauth/oauth.api";
 import { LoginFormFields } from "../../api/utils";
 
-const Login = () => {
+const LoginPage = () => {
   const {
     register,
     handleSubmit,
@@ -113,4 +113,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

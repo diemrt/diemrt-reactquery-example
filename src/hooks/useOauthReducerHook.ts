@@ -5,11 +5,11 @@ import oauthReducer from "../api/oauth/oauth.reducer";
 export type AuthState = {
     user?: User;
 }
-const useOauthReducer = () => {
+const useOauthReducerHook = () => {
     const INITIAL_STATE: AuthState = {
         user: undefined
     }
   return useReducer(oauthReducer, INITIAL_STATE)
 }
 
-export default useOauthReducer
+export default useOauthReducerHook

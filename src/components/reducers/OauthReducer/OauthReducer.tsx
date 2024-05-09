@@ -1,11 +1,11 @@
 import { OauthContext, OauthDispatchContext } from "../../../api/oauth/oauth.utils";
-import useOauthReducer from "../../../hooks/useOauthReducer.hook";
+import useOauthReducerHook from "../../../hooks/useOauthReducerHook";
 
 interface Props {
   children: React.ReactNode;
 }
 const OauthReducer = ({ children }: Props) => {
-  const [state, dispatch] = useOauthReducer();
+  const [state, dispatch] = useOauthReducerHook();
 
   return (
     <OauthContext.Provider value={state}>

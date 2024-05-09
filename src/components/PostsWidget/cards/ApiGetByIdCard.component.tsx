@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { readPostQuery } from "../../../api/posts/posts.api";
-import ButtonWithLoader from "../../ButtonWithLoader/ButtonWithLoader.component";
+import ButtonWithLoader from "../../ButtonWithLoader/ButtonWithLoader";
 import moment from "moment";
 
 const ApiGetByIdCard = () => {
