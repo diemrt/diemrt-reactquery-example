@@ -3,6 +3,9 @@ import GenericInput from "../../components/forms/GenericInput/GenericInput";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { LoginFormFields } from "../../api/utils";
+import { useAuth } from "react-oidc-context";
+import { useMutation } from "@tanstack/react-query";
+import { loginMutation } from "../../api/oauth/oathApi";
 
 const LoginPage = () => {
   const {
@@ -12,7 +15,14 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm<LoginFormFields>();
 
+  const auth = useAuth()
+  const mutation = useMutation(loginMutation())
   const onSubmit = (values: LoginFormFields) => {
+    mutation.mutate({
+      callback: auth.signinResourceOwnerCredentials, 
+      email: values.email,
+      password: values.password
+    })
   };
 
   useEffect(() => {
