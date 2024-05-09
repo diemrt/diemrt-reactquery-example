@@ -1,20 +1,7 @@
-import { useContext, useEffect } from "react";
-import { OauthDispatchContext } from "../../api/oauth/oauth.utils";
-import { useMutation } from "@tanstack/react-query";
-import { logoutMutation } from "../../api/oauth/oauth.api";
+import { useAuth } from "react-oidc-context";
 
 const Header = () => {
-  const dispatch = useContext(OauthDispatchContext);
-  const { mutate: logout, status, isSuccess } = useMutation(logoutMutation());
-
-  useEffect(() => {    
-    if (isSuccess) {
-      dispatch({
-        type: "invalidate",
-      });
-    }
-  }, [isSuccess, status, dispatch])
-
+  const auth = useAuth()
   return (
     <header className="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-4 lg:ps-64 dark:bg-gray-800 dark:border-gray-700">
       <nav
@@ -88,7 +75,7 @@ const Header = () => {
             <button
               type="button"
               className="w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-              onClick={logout}
+              onClick={auth.removeUser}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

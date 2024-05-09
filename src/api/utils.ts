@@ -6,7 +6,7 @@ import {
 } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { client } from "./oauth/oauth.utils";
+import { getStoredUser } from "./oauth/oauth.utils";
 
 const getRootUrl = () => {
   const cache: { [key: string]: string } = {};
@@ -28,29 +28,16 @@ export const queryData = <T>(
   url: string,
   accessToken: string | null = null,
   params: object | null = null
-) => {
+): Promise<T> => {
   const reqHeaders = {
     Accept: "application/json",
     "Content-Type": "application/json",
     Authorization: `Bearer ${accessToken}`,
   };
 
-  return axios
-    .get<T>(url, { headers: reqHeaders, params })
-    .then((response) => {
-      return response.data;
-    })
-    .catch(function (error) {
-      if (error.response) {
-        throw new Error(
-          error.response.data.error?.message || error.response.data
-        );
-      } else if (error.request) {
-        throw new Error(error.request);
-      } else {
-        console.log("Error", error.message);
-      }
-    });
+  return axios.get<T>(url, { headers: reqHeaders, params }).then((response) => {
+    return response.data;
+  });
 };
 
 export const mutateData = <T>(
@@ -70,21 +57,9 @@ export const mutateData = <T>(
     method: method,
     url: url,
     data: body,
-  })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      if (error.response) {
-        throw new Error(
-          error.response.data.erorr?.message || error.response.data
-        );
-      } else if (error.request) {
-        throw new Error(error.request);
-      } else {
-        console.log("Error", error.message);
-      }
-    });
+  }).then((response) => {
+    return response.data;
+  });
 };
 
 export const apiQueryOptions = <T>({
@@ -99,12 +74,9 @@ export const apiQueryOptions = <T>({
   return queryOptions({
     queryKey: providesTags,
     queryFn: () => {
+      const user = getStoredUser();
       return new Promise<T>((resolve, reject) => {
-        client.getUser()
-          .then((user) => user?.id_token)
-          .then((accessToken) =>
-            queryData<T>(`${getAPIUrl()}${url()}`, accessToken)
-          )
+        queryData<T>(`${getAPIUrl()}${url()}`, user?.access_token)
           .then((data) => resolve(data))
           .catch((error) => reject(error));
       });
@@ -127,12 +99,14 @@ export const apiMutationOptions = <T>({
 }) => {
   return {
     mutationFn: () => {
+      const user = getStoredUser();
       return new Promise<T>((resolve, reject) => {
-        client.getUser()
-          .then((user) => user?.id_token)
-          .then((accessToken) =>
-            mutateData<T>(`${getAPIUrl()}${url()}`, accessToken, body, method)
-          )
+        mutateData<T>(
+          `${getAPIUrl()}${url()}`,
+          user?.access_token,
+          body,
+          method
+        )
           .then((data) => resolve(data))
           .catch((error) => reject(error));
       });

@@ -1,31 +1,42 @@
-import { useContext, useEffect } from "react";
-import { checkUserSessionQuery } from "../../api/oauth/oauth.api";
-import { useQuery } from "@tanstack/react-query";
-import { OauthDispatchContext } from "../../api/oauth/oauth.utils";
+import { useEffect, useState } from "react";
 import WithFullScreenSkeleton from "../../components/WithFullScreenSkeleton/WithFullScreenSkeleton";
 import HomePage from "../HomePage/HomePage";
 import LoginPage from "../LoginPage/LoginPage";
+import { hasAuthParams, useAuth } from "react-oidc-context";
 
 const LandingPage = () => {
   const HomeWithSkeleton = WithFullScreenSkeleton(HomePage);
   const LoginWithSkeleton = WithFullScreenSkeleton(LoginPage);
-  const checkUserSessionsQueryOptions = checkUserSessionQuery();
-  const { isPending, status, data } = useQuery(checkUserSessionsQueryOptions);
-  const dispatch = useContext(OauthDispatchContext);
+  const [hasTriedSignin, setHasTriedSignin] = useState(false);
+  const auth = useAuth();
 
   useEffect(() => {
-    dispatch({
-      type: status,
-      payload: data?.user,
-    });
-  }, [dispatch, data, status]);
+    if (
+      !hasAuthParams() &&
+      !auth.isAuthenticated &&
+      !auth.activeNavigator &&
+      !auth.isLoading &&
+      !hasTriedSignin
+    ) {
+      auth.signinRedirect();
+      setHasTriedSignin(true);
+    }
 
-  return (
-    data?.user ? (
-        <HomeWithSkeleton isLoading={isPending} />
-    ) : (
-        <LoginWithSkeleton isLoading={isPending} />
-    )
+    return auth.events.addAccessTokenExpiring(() => {
+      if (
+        confirm(
+          "You're about to be signed out due to inactivity. Press continue to stay signed in."
+        )
+      ) {
+        auth.signinSilent();
+      }
+    });
+  }, [auth, hasTriedSignin, auth.events, auth.signinSilent]);
+
+  return auth.isAuthenticated ? (
+    <HomeWithSkeleton isLoading={auth.isLoading} />
+  ) : (
+    <h1>Caricamento...</h1>
   );
 };
 

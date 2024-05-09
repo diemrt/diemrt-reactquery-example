@@ -1,9 +1,7 @@
 import { NavLink } from "react-router-dom";
 import GenericInput from "../../components/forms/GenericInput/GenericInput";
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { loginMutation } from "../../api/oauth/oauth.api";
 import { LoginFormFields } from "../../api/utils";
 
 const LoginPage = () => {
@@ -13,10 +11,8 @@ const LoginPage = () => {
     setFocus,
     formState: { errors },
   } = useForm<LoginFormFields>();
-  const mutation = useMutation(loginMutation());
 
   const onSubmit = (values: LoginFormFields) => {
-    mutation.mutate(values);
   };
 
   useEffect(() => {

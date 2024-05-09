@@ -1,7 +1,8 @@
+import { Navigate } from "react-router-dom"
 
 const SigninCallbackPage = () => {
   return (
-    <div>SigninCallbackPage</div>
+    <Navigate to="/" />
   )
 }
 
