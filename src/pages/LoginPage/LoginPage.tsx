@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import ShowOnCondition from "../../components/ShowOnCondition/ShowOnCondition";
 import LoginForm from "../../components/forms/LoginForm/LoginForm";
 import { hasAuthParams, useAuth } from "react-oidc-context";
+import { isRopcEnabled } from "../../api/oauth/oauthUtils";
 
 const LoginPage = () => {
-  const isResourceOwnerLogin = import.meta.env.VITE_OAUTH_ENABLE_RESOURCE_OWNER_FLOW === "true";
   const auth = useAuth()
   const [hasTriedSignin, setHasTriedSignin] = useState(false);
   useEffect(() => {
     if (!hasAuthParams() &&
         !auth.isAuthenticated && !auth.activeNavigator && !auth.isLoading &&
         !hasTriedSignin &&
-        !isResourceOwnerLogin
+        !isRopcEnabled
     ) {
         auth.signinRedirect();
         setHasTriedSignin(true);
@@ -23,9 +23,9 @@ const LoginPage = () => {
       }
   })
 
-}, [auth, hasTriedSignin, isResourceOwnerLogin, auth.events, auth.signinSilent]);
+}, [auth, hasTriedSignin, auth.events, auth.signinSilent]);
   return (
-    <ShowOnCondition showWhen={isResourceOwnerLogin}>
+    <ShowOnCondition showWhen={isRopcEnabled}>
       <LoginForm />
     </ShowOnCondition>
   );
