@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { updatePostMutation } from "../../../api/posts/posts.api";
+import { updatePostMutation } from "../../../api/posts/postsApi";
 import ButtonWithLoader from "../../ButtonWithLoader/ButtonWithLoader";
 import moment from "moment";
 

@@ -6,7 +6,7 @@ import {
 } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { getStoredUser } from "./oauth/oauth.utils";
+import { getStoredUser } from "./oauth/oauthUtils";
 
 const getRootUrl = () => {
   const cache: { [key: string]: string } = {};

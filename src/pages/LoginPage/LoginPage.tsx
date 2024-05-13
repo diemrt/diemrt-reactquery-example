@@ -4,21 +4,21 @@ import LoginForm from "../../components/forms/LoginForm/LoginForm";
 import { hasAuthParams, useAuth } from "react-oidc-context";
 
 const LoginPage = () => {
-  const isRedirectLogin = true; //set false to enable custom login
+  const isResourceOwnerLogin = import.meta.env.VITE_OAUTH_ENABLE_RESOURCE_OWNER_FLOW === "true";
   const auth = useAuth()
   const [hasTriedSignin, setHasTriedSignin] = useState(false);
   useEffect(() => {
     if (!hasAuthParams() &&
         !auth.isAuthenticated && !auth.activeNavigator && !auth.isLoading &&
         !hasTriedSignin &&
-        isRedirectLogin
+        !isResourceOwnerLogin
     ) {
         auth.signinRedirect();
         setHasTriedSignin(true);
     }
-}, [auth, hasTriedSignin, isRedirectLogin]);
+}, [auth, hasTriedSignin, isResourceOwnerLogin]);
   return (
-    <ShowOnCondition showWhen={!isRedirectLogin}>
+    <ShowOnCondition showWhen={!isResourceOwnerLogin}>
       <LoginForm />
     </ShowOnCondition>
   );

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { readPostsQuery } from "../../../api/posts/posts.api";
+import { readPostsQuery } from "../../../api/posts/postsApi";
 import ButtonWithLoader from "../../ButtonWithLoader/ButtonWithLoader";
 import moment from "moment";
 

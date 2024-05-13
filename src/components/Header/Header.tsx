@@ -8,12 +8,14 @@ const Header = () => {
         "Stai per essere disconnesso a causa di inattività. Premi “Continua” per rimanere connesso."
       )
     ) {
-      auth.signinSilent();
+      auth.signinSilent({
+        redirect_uri: import.meta.env.VITE_OAUTH_REDIRECT_URI
+      });
     }
   };
   const runLogout = () => {
     if (confirm("Sei sicuro di voler effettuare il logout?")) {
-      auth.removeUser();
+      auth.signoutSilent();
     }
   };
   return (

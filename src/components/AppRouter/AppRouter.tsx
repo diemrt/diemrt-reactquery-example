@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import ReinitializationHelper from "../ReinitializationHelper/ReinitializationHelper."
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage"
-import { getStoredUser } from "../../api/oauth/oauth.utils"
+import { getStoredUser } from "../../api/oauth/oauthUtils"
 import PrivateRoute from "./PrivateRoute"
 import NonePage from "../../pages/NonePage/NonePage"
 import SigninCallbackPage from "../../pages/SigninCallbackPage/SigninCallbackPage"
