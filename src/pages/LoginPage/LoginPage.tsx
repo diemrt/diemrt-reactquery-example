@@ -16,9 +16,16 @@ const LoginPage = () => {
         auth.signinRedirect();
         setHasTriedSignin(true);
     }
-}, [auth, hasTriedSignin, isResourceOwnerLogin]);
+    
+    return auth.events.addAccessTokenExpiring(() => {
+      if (confirm("Stai per essere disconnesso a causa di inattività. Premi “Continua” per rimanere connesso.")) {
+          auth.signinSilent();
+      }
+  })
+
+}, [auth, hasTriedSignin, isResourceOwnerLogin, auth.events, auth.signinSilent]);
   return (
-    <ShowOnCondition showWhen={!isResourceOwnerLogin}>
+    <ShowOnCondition showWhen={isResourceOwnerLogin}>
       <LoginForm />
     </ShowOnCondition>
   );
