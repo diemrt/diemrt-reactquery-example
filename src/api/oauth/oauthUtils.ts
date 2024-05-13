@@ -1,11 +1,11 @@
-import { User, WebStorageStateStore } from "oidc-client-ts";
+import { User, UserManagerSettings, WebStorageStateStore } from "oidc-client-ts";
 
 
-export const isRopcEnabled = import.meta.env.VITE_OAUTH_IS_ROPC === "true"
+export const isRopcEnabled = import.meta.env.VITE_OAUTH_IS_ROPC === "false"
 
 export const authority = isRopcEnabled ? import.meta.env.VITE_OAUTH_ROPC_AUTHORITY : import.meta.env.VITE_OAUTH_REDIRECT_AUTHORITY
 
-export const oidcConfig = {
+export const oidcConfig: UserManagerSettings = {
   authority: authority,
   client_id: import.meta.env.VITE_OAUTH_CLIENT_ID,
   redirect_uri: import.meta.env.VITE_OAUTH_REDIRECT_URI,

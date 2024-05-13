@@ -1,3 +1,4 @@
+import { ProcessResourceOwnerPasswordCredentialsArgs } from "oidc-client-ts";
 import queryClient from "../utils";
 
 export const loginMutation = () => {
@@ -6,8 +7,8 @@ export const loginMutation = () => {
       return new Promise(() => {
         callback({
             username: email,
-            password: password,
-          })
+            password: password
+          } as ProcessResourceOwnerPasswordCredentialsArgs)
       });
     },
     onSuccess: () => {
