@@ -1,7 +1,7 @@
 import { User, UserManagerSettings, WebStorageStateStore } from "oidc-client-ts";
 
 
-export const isRopcEnabled = import.meta.env.VITE_OAUTH_IS_ROPC === "false"
+export const isRopcEnabled = import.meta.env.VITE_OAUTH_IS_ROPC === "true"
 
 export const authority = isRopcEnabled ? import.meta.env.VITE_OAUTH_ROPC_AUTHORITY : import.meta.env.VITE_OAUTH_REDIRECT_AUTHORITY
 
@@ -12,7 +12,7 @@ export const oidcConfig: UserManagerSettings = {
   userStore: new WebStorageStateStore({
     store: window.localStorage,
   }),
-  scope: import.meta.env.VITE_OAUTH_SCOPE
+  scope: isRopcEnabled ? import.meta.env.VITE_OAUTH_SCOPE : undefined
 };
 
 export function getStoredUser() {
