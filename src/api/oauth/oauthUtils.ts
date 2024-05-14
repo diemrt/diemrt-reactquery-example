@@ -12,6 +12,7 @@ export const oidcConfig: UserManagerSettings = {
   userStore: new WebStorageStateStore({
     store: window.localStorage,
   }),
+  scope: import.meta.env.VITE_OAUTH_SCOPE
 };
 
 export function getStoredUser() {
