@@ -19,7 +19,7 @@ const LoginForm = () => {
   const mutation = useMutation(loginMutation());
   const onSubmit = (values: LoginFormFields) => {
     mutation.mutate({
-      callback: auth.signinResourceOwnerCredentials,
+      auth: auth,
       email: values.email,
       password: values.password,
     });
